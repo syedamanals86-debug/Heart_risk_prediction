@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Health Risk Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-content">
+                <i class="fas fa-heartbeat header-icon"></i>
+                <div class="header-text">
+                    <h1>Heart Health Risk Assessment</h1>
+                    <p class="subtitle">AI-powered screening tool for cardiovascular risk evaluation</p>
+                </div>
+            </div>
+            <div class="warning-banner">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>This tool provides AI-based estimates only. Always consult healthcare professionals for medical advice.</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="form-container">
+                <form action="/predict" method="post" class="assessment-form">
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-user section-icon"></i>
+                            <h2>Patient Information</h2>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">
+                                    <i class="fas fa-signature"></i>
+                                    Full Name
+                                </label>
+                                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="age">
+                                    <i class="fas fa-birthday-cake"></i>
+                                    Age
+                                </label>
+                                <input type="number" id="age" name="age" required min="1" max="120" placeholder="Years">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="gender">
+                                    <i class="fas fa-venus-mars"></i>
+                                    Gender
+                                </label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-chart-line section-icon"></i>
+                            <h2>Health Metrics</h2>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="bp">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    Blood Pressure
+                                </label>
+                                <input type="number" id="bp" name="bp" min="60" max="250" placeholder="mmHg (e.g., 120)">
+                            </div>
+                            <div class="form-group">
+                                <label for="chol">
+                                    <i class="fas fa-vial"></i>
+                                    Cholesterol
+                                </label>
+                                <input type="number" id="chol" name="chol" min="100" max="600" placeholder="mg/dL (e.g., 200)">
+                            </div>
+                            <div class="form-group">
+                                <label for="heart_rate">
+                                    <i class="fas fa-heartbeat"></i>
+                                    Resting Heart Rate
+                                </label>
+                                <input type="number" id="heart_rate" name="heart_rate" min="40" max="200" placeholder="bpm (e.g., 72)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-stethoscope section-icon"></i>
+                            <h2>Symptoms & Conditions</h2>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="cp">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    Chest Pain Level
+                                </label>
+                                <select id="cp" name="cp" required>
+                                    <option value="">Select chest pain level</option>
+                                    <option value="0">No chest pain</option>
+                                    <option value="1">Mild chest pain</option>
+                                    <option value="2">Moderate chest pain</option>
+                                    <option value="3">Severe chest pain</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exercise">
+                                    <i class="fas fa-running"></i>
+                                    Exercise-Induced Discomfort
+                                </label>
+                                <select id="exercise" name="exercise" required>
+                                    <option value="">Select option</option>
+                                    <option value="No">No discomfort</option>
+                                    <option value="Yes">Yes, I experience discomfort</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sugar">
+                                    <i class="fas fa-candy-cane"></i>
+                                    Blood Sugar Level
+                                </label>
+                                <select id="sugar" name="sugar" required>
+                                    <option value="">Select blood sugar level</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="High">High (fasting > 126 mg/dL)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="analyze-btn">
+                            <i class="fas fa-search"></i>
+                            Analyze Heart Risk
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>
+                    <i class="fas fa-shield-alt"></i>
+                    This assessment uses machine learning algorithms trained on medical data.
+                    Results are for informational purposes only and should not replace professional medical advice.
+                </p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

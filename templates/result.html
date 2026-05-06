@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Risk Assessment Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="results-container">
+        <header class="results-header">
+            <div class="header-content">
+                <i class="fas fa-heartbeat header-icon"></i>
+                <div class="header-text">
+                    <h1>Heart Risk Assessment Results</h1>
+                    <p class="subtitle">A structured summary with personalized guidance and next steps.</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="results-main">
+            <div class="results-card">
+                <div class="assessment-overview">
+                    <div>
+                        <p class="meta-label">Patient</p>
+                        <h2>{{ name }}</h2>
+                        <p class="meta-note">Assessment completed on {{ current_date or "today" }}</p>
+                    </div>
+                    <div class="score-pod {{ 'low-risk' if score < 30 else 'moderate-risk' if score < 70 else 'high-risk' }}">
+                        <span class="score-title">Risk Score</span>
+                        <strong>{{ score }}%</strong>
+                    </div>
+                </div>
+
+                <div class="status-strip {{ 'low-risk' if score < 30 else 'moderate-risk' if score < 70 else 'high-risk' }}">
+                    {% if score < 30 %}
+                        <i class="fas fa-shield-alt"></i> Low risk — keep following your healthy habits.
+                    {% elif score < 70 %}
+                        <i class="fas fa-exclamation-triangle"></i> Moderate risk — make lifestyle improvements and monitor regularly.
+                    {% else %}
+                        <i class="fas fa-heart-crack"></i> High risk — seek medical attention promptly.
+                    {% endif %}
+                </div>
+
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>Recommended Actions</h3>
+                        <ul class="action-list">
+                            {% for action in actions %}
+                                <li>{{ action }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h3>What to Avoid</h3>
+                        <p>{{ avoid }}</p>
+                    </div>
+                </div>
+
+                {% if score >= 70 %}
+                <div class="alert-card">
+                    <div class="alert-icon">
+                        <i class="fas fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="alert-copy">
+                        <h3>High Risk Action Plan</h3>
+                        <p>If your score is high, follow these urgent steps and contact a cardiologist immediately.</p>
+                    </div>
+                </div>
+
+                <div class="urgent-actions">
+                    <h4>Urgent next steps</h4>
+                    <ul class="urgent-list">
+                        {% for step in high_risk_actions %}
+                            <li>{{ step }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <div class="action-buttons">
+                    <a href="/download" class="btn btn-primary">
+                        <i class="fas fa-download"></i>
+                        Download PDF Report
+                    </a>
+                    <a href="/" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i>
+                        New Assessment
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="results-footer">
+            <div class="disclaimer">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>Important Disclaimer:</strong> This assessment uses machine learning algorithms trained on medical data.
+                    It is for informational purposes only and should not replace professional diagnosis or treatment.
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
