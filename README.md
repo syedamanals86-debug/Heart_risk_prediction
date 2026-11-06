@@ -71,6 +71,7 @@ Then open the local URL shown in the terminal (usually `http://127.0.0.1:5000/`)
 Syeda Rana Manal
 
 GitHub: https://github.com/syedamanals86-debug
+
 Linkdin: https://www.linkedin.com/in/syeda-rana-manal-2bb3a240b/
 
 
