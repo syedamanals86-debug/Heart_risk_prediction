@@ -2,6 +2,9 @@
 
 A Flask web application that predicts heart disease risk using a trained machine learning model. Users can enter health and lifestyle details, get a risk prediction, view personalized recommendations, and download a professional PDF report.
 
+https://github.com/user-attachments/assets/754a0a06-faae-46a8-a3ab-854bd8f6a162
+
+
 ## Key Features
 
 - Heart disease risk classification using a `RandomForestClassifier`
@@ -68,6 +71,6 @@ Then open the local URL shown in the terminal (usually `http://127.0.0.1:5000/`)
 Syeda Rana Manal
 
 GitHub: https://github.com/syedamanals86-debug
-
+Linkdin: https://www.linkedin.com/in/syeda-rana-manal-2bb3a240b/
 
 
