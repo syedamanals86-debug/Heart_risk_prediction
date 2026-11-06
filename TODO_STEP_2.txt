@@ -1,0 +1,2 @@
+Step 2: Update app.py to compute adjusted score and pass influence to templates.
+

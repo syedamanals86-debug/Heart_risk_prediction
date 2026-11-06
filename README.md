@@ -62,3 +62,12 @@ Then open the local URL shown in the terminal (usually `http://127.0.0.1:5000/`)
 
 - The app is for informational purposes only and should not replace professional medical advice.
 - For high-risk results, review the provided recommendations and consult a doctor.
+
+## Author
+
+Syeda Rana Manal
+
+GitHub: https://github.com/syedamanals86-debug
+
+
+

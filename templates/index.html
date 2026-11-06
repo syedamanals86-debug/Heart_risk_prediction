@@ -135,6 +135,51 @@
                         </div>
                     </div>
 
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-smoking section-icon"></i>
+                            <h2>Smoking & Lifestyle</h2>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="smoking">
+                                    <i class="fas fa-smoking"></i>
+                                    Smoking Status
+                                </label>
+                                <select id="smoking" name="smoking" required>
+                                    <option value="">Select smoking status</option>
+                                    <option value="Never">Never</option>
+                                    <option value="Former">Former</option>
+                                    <option value="Current">Current</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="lifestyle_exercise">
+                                    <i class="fas fa-person-walking"></i>
+                                    Exercise Frequency
+                                </label>
+                                <select id="lifestyle_exercise" name="lifestyle_exercise" required>
+                                    <option value="">Select exercise frequency</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Moderate">Moderate</option>
+                                    <option value="High">High</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="diet">
+                                    <i class="fas fa-leaf"></i>
+                                    Diet Quality
+                                </label>
+                                <select id="diet" name="diet" required>
+                                    <option value="">Select diet quality</option>
+                                    <option value="Poor">Poor</option>
+                                    <option value="Fair">Fair</option>
+                                    <option value="Healthy">Healthy</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-actions">
                         <button type="submit" class="analyze-btn">
                             <i class="fas fa-search"></i>
@@ -157,3 +202,4 @@
     </div>
 </body>
 </html>
+

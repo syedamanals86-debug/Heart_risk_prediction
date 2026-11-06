@@ -12,10 +12,14 @@ model = joblib.load('model/model.pkl')
 last_result = {}
 
 def safe_int(val, default=0):
-    return int(val) if val else default
+    return int(val) if val is not None and val != "" else default
 
 def safe_float(val, default=0.0):
-    return float(val) if val else default
+    return float(val) if val is not None and val != "" else default
+
+def clamp(v, lo=0.0, hi=100.0):
+    return max(lo, min(hi, v))
+
 
 
 @app.route('/')
@@ -59,9 +63,41 @@ def predict():
                       oldpeak, slope, ca, thal]])
 
     prob = model.predict_proba(data)[0][1]
-    score = round(prob * 100, 2)
+    ml_score = round(prob * 100, 2)
 
-    # Risk classification
+    # New lifestyle inputs (rule-based adjustment for hackathon speed)
+    smoking = request.form.get('smoking', '')
+    lifestyle_exercise = request.form.get('lifestyle_exercise', '')
+    diet = request.form.get('diet', '')
+
+    # Score adjustment is bounded and explained in UI/PDF
+    smoking_delta = 0.0
+    if smoking == 'Current':
+        smoking_delta = 12.0
+    elif smoking == 'Former':
+        smoking_delta = 6.0
+
+    exercise_delta = 0.0
+    if lifestyle_exercise == 'Low':
+        exercise_delta = 8.0
+    elif lifestyle_exercise == 'High':
+        exercise_delta = -6.0
+
+    diet_delta = 0.0
+    if diet == 'Poor':
+        diet_delta = 8.0
+    elif diet == 'Healthy':
+        diet_delta = -6.0
+
+    adjusted_score = clamp(ml_score + smoking_delta + exercise_delta + diet_delta, 0, 100)
+
+    influences = []
+    influences.append(f"Smoking status adjustment: {smoking_delta:+.0f}%")
+    influences.append(f"Exercise frequency adjustment: {exercise_delta:+.0f}%")
+    influences.append(f"Diet quality adjustment: {diet_delta:+.0f}%")
+
+    # Risk classification uses adjusted_score
+    score = adjusted_score
     if score < 30:
         risk = "Low Risk"
         advice = "Maintain a healthy lifestyle with balanced diet and regular physical activity."
@@ -97,18 +133,24 @@ def predict():
             "Follow prescribed medication and treatment plans strictly."
         ]
 
+
     # Store result
     current_date = datetime.now().strftime("%B %d, %Y")
     last_result = {
         "name": name,
         "risk": risk,
-        "score": score,
+        "score": round(score, 2),
+        "ml_score": ml_score,
+        "adjusted_score": round(adjusted_score, 2),
         "advice": advice,
         "avoid": avoid,
         "actions": actions,
         "high_risk_actions": high_risk_actions,
+        "influences": influences,
         "current_date": current_date
     }
+
+
 
     return render_template("result.html", **last_result)
 

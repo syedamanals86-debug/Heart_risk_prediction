@@ -29,6 +29,7 @@
                         <h2>{{ name }}</h2>
                         <p class="meta-note">Assessment completed on {{ current_date or "today" }}</p>
                     </div>
+
                     <div class="score-pod {{ 'low-risk' if score < 30 else 'moderate-risk' if score < 70 else 'high-risk' }}">
                         <span class="score-title">Risk Score</span>
                         <strong>{{ score }}%</strong>
@@ -54,10 +55,24 @@
                             {% endfor %}
                         </ul>
                     </div>
+
                     <div class="summary-card">
                         <h3>What to Avoid</h3>
                         <p>{{ avoid }}</p>
                     </div>
+                </div>
+
+                <div class="summary-card lifestyle-summary">
+                    <h3>How your inputs influenced the result</h3>
+                    <p class="muted">
+                        Machine-learning score: <strong>{{ ml_score }}%</strong> →
+                        Adjusted score: <strong>{{ adjusted_score }}%</strong>
+                    </p>
+                    <ul class="action-list">
+                        {% for item in influences %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
 
                 {% if score >= 70 %}
@@ -106,3 +121,4 @@
     </div>
 </body>
 </html>
+

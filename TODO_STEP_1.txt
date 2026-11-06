@@ -1,0 +1,2 @@
+Step 1: Update index.html to include smoking status + exercise frequency + diet.
+

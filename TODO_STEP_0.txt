@@ -1,0 +1,2 @@
+Step 0: (Already) Ensure changes are consistent across index.html, app.py, result.html, style.css.
+
